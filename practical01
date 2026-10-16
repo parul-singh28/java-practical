@@ -51,7 +51,7 @@ class Student {
         Student s2 = new Student(102, "Mayank", 92, 88, 95);
         Student s3 = new Student(103, "Rahul", 75, 80, 85);
 
-        // Displaying student details
+        // Displaying student details using display
         s1.displayDetails();
         s2.displayDetails();
         s3.displayDetails();
