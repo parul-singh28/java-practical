@@ -1,41 +1,34 @@
 
 class Demo {
+
     // Constructor
     Demo() {
         System.out.println("Object is created.");
     }
 
+    // Method to use the object
     void display() {
         System.out.println("Object is being used.");
-    }
-
-    // Method called when object becomes eligible for GC
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            System.out.println("Garbage collector may clean up the object.");
-        } finally {
-            super.finalize();
-        }
     }
 }
 
 public class Main {
     public static void main(String[] args) {
 
+        // Creating an object
         Demo obj = new Demo();
 
+        // Using the object
         obj.display();
 
-        // Remove the reachable reference
+        // Removing the reference
         obj = null;
 
-        System.out.println("Reference removed.");
-        
-        // Request garbage collection
+        // Requesting garbage collection
         System.gc();
 
-        System.out.println("End of main method.");
+        System.out.println("Garbage collection requested.");
     }
 }
+
 
