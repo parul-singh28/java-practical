@@ -1,45 +1,84 @@
 
-
-class ComplexNumber {
-    double real;
-    double imaginary;
+class BankAccount {
+    // Private data members
+    private String accountHolder;
+    private String accountNumber;
+    private double balance;
 
     // Constructor
-    ComplexNumber(double real, double imaginary) {
-        this.real = real;
-        this.imaginary = imaginary;
-    }
+    BankAccount(String accountHolder, String accountNumber,
+                double balance) {
+        this.accountHolder = accountHolder;
+        this.accountNumber = accountNumber;
 
-    // Method to add two complex numbers
-    ComplexNumber add(ComplexNumber other) {
-        double r = this.real + other.real;
-        double i = this.imaginary + other.imaginary;
-
-        return new ComplexNumber(r, i);
-    }
-
-    // Method to display a complex number
-    void display() {
-        if (imaginary >= 0) {
-            System.out.println(real + " + " + imaginary + "i");
+        if (balance >= 0) {
+            this.balance = balance;
         } else {
-            System.out.println(real + " - " + (-imaginary) + "i");
+            this.balance = 0;
         }
     }
 
-    public static void main(String[] args) {
-        ComplexNumber c1 = new ComplexNumber(3, 4);
-        ComplexNumber c2 = new ComplexNumber(2, 5);
+    // Getters
+    public String getAccountHolder() {
+        return accountHolder;
+    }
 
-        ComplexNumber sum = c1.add(c2);
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
-        System.out.print("First complex number: ");
-        c1.display();
+    public double getBalance() {
+        return balance;
+    }
 
-        System.out.print("Second complex number: ");
-        c2.display();
+    // Deposit method with validation
+    public void deposit(double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid deposit amount!");
+        } else {
+            balance += amount;
+            System.out.println("Deposit successful: Rs. " + amount);
+        }
+    }
 
-        System.out.print("Sum: ");
-        sum.display();
+    // Withdrawal method with validation
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("Invalid withdrawal amount!");
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance!");
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawal successful: Rs. " + amount);
+        }
     }
 }
+
+public class Main {
+    public static void main(String[] args) {
+        BankAccount account =
+            new BankAccount("Parul", "123456789", 5000);
+
+        System.out.println("Account Holder: "
+                           + account.getAccountHolder());
+        System.out.println("Account Number: "
+                           + account.getAccountNumber());
+        System.out.println("Initial Balance: Rs. "
+                           + account.getBalance());
+
+        // Valid transactions
+        account.deposit(2000);
+        account.withdraw(1000);
+
+        // Invalid transactions
+        account.deposit(-500);
+        account.withdraw(0);
+        account.withdraw(-200);
+        account.withdraw(10000);
+
+        // Updated balance
+        System.out.println("Final Balance: Rs. "
+                           + account.getBalance());
+    }
+}
+
